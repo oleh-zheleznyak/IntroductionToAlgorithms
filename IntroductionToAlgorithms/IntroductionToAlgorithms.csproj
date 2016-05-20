@@ -40,7 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GraphAlgorithms\DepthFirstSearchIterator.cs" />
+    <Compile Include="GraphAlgorithms\BreadthFirstSearchIterator.cs" />
     <Compile Include="GraphAlgorithms\DirectedGraph.cs" />
+    <Compile Include="GraphAlgorithms\DirectedGraphBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
