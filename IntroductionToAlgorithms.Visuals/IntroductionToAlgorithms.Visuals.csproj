@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9C6DF5EA-1A14-4AB8-A56E-1E749111B2DC}</ProjectGuid>
+    <ProjectGuid>{FB6FC84A-DDC8-4465-B37A-3FDFC4C0128E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IntroductionToAlgorithms</RootNamespace>
-    <AssemblyName>IntroductionToAlgorithms</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>IntroductionToAlgorithms.Visuals</RootNamespace>
+    <AssemblyName>IntroductionToAlgorithms.Visuals</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -40,13 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GraphAlgorithms\DepthFirstSearchIterator.cs" />
-    <Compile Include="GraphAlgorithms\BreadthFirstSearchIterator.cs" />
-    <Compile Include="GraphAlgorithms\DirectedGraph.cs" />
-    <Compile Include="GraphAlgorithms\DirectedGraphBuilder.cs" />
+    <Compile Include="DirectedGraph.cs" />
+    <Compile Include="Edge.cs" />
+    <Compile Include="GraphTypeConverter.cs" />
+    <Compile Include="Vertice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\IntroductionToAlgorithms\IntroductionToAlgorithms.csproj">
+      <Project>{9c6df5ea-1a14-4ab8-a56e-1e749111b2dc}</Project>
+      <Name>IntroductionToAlgorithms</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

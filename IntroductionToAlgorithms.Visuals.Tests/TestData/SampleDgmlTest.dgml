@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Title="Sample Graph" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="1" Label="A" />
+    <Node Id="2" Label="B" />
+  </Nodes>
+  <Links>
+    <Link Source="1" Target="2" Label="V" />
+  </Links>
+</DirectedGraph>
