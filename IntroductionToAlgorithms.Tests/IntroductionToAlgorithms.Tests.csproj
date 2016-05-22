@@ -54,6 +54,7 @@
     <Compile Include="GraphAlgorithms\BreadthFirstSearchIteratorTest.cs" />
     <Compile Include="GraphAlgorithms\DfsParenthesisFormatterTest.cs" />
     <Compile Include="GraphAlgorithms\TestHelper.cs" />
+    <Compile Include="GraphAlgorithms\TopologicalSortTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

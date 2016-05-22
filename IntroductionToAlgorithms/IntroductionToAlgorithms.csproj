@@ -47,6 +47,7 @@
     <Compile Include="GraphAlgorithms\DfsVertice.cs" />
     <Compile Include="GraphAlgorithms\DirectedGraph.cs" />
     <Compile Include="GraphAlgorithms\DirectedGraphBuilder.cs" />
+    <Compile Include="GraphAlgorithms\TopologicalSort.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
