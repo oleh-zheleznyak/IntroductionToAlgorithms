@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IntroductionToAlgorithms.GraphAlgorithms
 {
-    public class BreadthFirstSearchIterator<T> : IEnumerable<T>
+    public class BreadthFirstSearchIterator<T> : IEnumerable<BfsVertice<T>>
          where T : IEquatable<T>
     {
         public BreadthFirstSearchIterator(DirectedGraph<T> graph, T source)
@@ -19,28 +19,29 @@ namespace IntroductionToAlgorithms.GraphAlgorithms
         private readonly DirectedGraph<T> _graph;
         private readonly T _source;
 
-        public IEnumerator<T> GetEnumerator()
+        public IEnumerator<BfsVertice<T>> GetEnumerator()
         {
             var visited = new HashSet<T>();
-            var queue = new Queue<T>();
+            var queue = new Queue<BfsVertice<T>>();
 
-            queue.Enqueue(_source);
+            // NOTE: questionable usage of default(T) - it is not meaningful for non-reference types, especially for integers
+            queue.Enqueue(new BfsVertice<T>(_source, default(T), 0));
 
             while (queue.Count > 0)
             {
-                var vertice = queue.Dequeue();
+                var bfsVertice = queue.Dequeue();
 
-                if (!visited.Contains(vertice))
+                if (!visited.Contains(bfsVertice.Vertice))
                 {
-                    visited.Add(vertice);
+                    visited.Add(bfsVertice.Vertice);
 
-                    foreach (var adjacentVertice in _graph.GetAdjacentVertices(vertice))
+                    foreach (var adjacentVertice in _graph.GetAdjacentVertices(bfsVertice.Vertice))
                     {
-                        queue.Enqueue(adjacentVertice);
+                        queue.Enqueue(new BfsVertice<T>(adjacentVertice, bfsVertice.Vertice, bfsVertice.Distance+1));
                     }
                 }
 
-                yield return vertice;
+                yield return bfsVertice;
             }
         }
 

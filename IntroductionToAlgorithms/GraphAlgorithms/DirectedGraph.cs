@@ -29,7 +29,7 @@ namespace IntroductionToAlgorithms.GraphAlgorithms
 
         public IEnumerable<T> BreadthFirstSearch(T source)
         {
-            return new BreadthFirstSearchIterator<T>(this, source);
+            return new BreadthFirstSearchIterator<T>(this, source).Select(x => x.Vertice);
         }
     }
 }

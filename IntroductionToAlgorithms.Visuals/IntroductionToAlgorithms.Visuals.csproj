@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DgmlSerializer.cs" />
     <Compile Include="DirectedGraph.cs" />
     <Compile Include="Edge.cs" />
     <Compile Include="GraphTypeConverter.cs" />

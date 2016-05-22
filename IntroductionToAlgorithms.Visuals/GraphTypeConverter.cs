@@ -40,6 +40,21 @@ namespace IntroductionToAlgorithms.Visuals
             return base.ConvertTo(context, culture, value, destinationType);
         }
 
+        public DirectedGraph Convert<T>(GraphAlgorithms.DirectedGraph<T> graph)
+            where T : IEquatable<T>
+        {
+            var result = new DirectedGraph();
+
+            var counter = 0;
+
+            var map = graph.Vertices.ToDictionary(x => x, x => new Vertice(counter++.ToString(), x.ToString()));
+
+            result.Vertices = map.Values.ToArray();
+            result.Edges = graph.Edges.Select(x => new Edge(map[x.Item1], map[x.Item2], null)).ToArray();
+
+            return result;
+        }
+
         public override bool IsValid(ITypeDescriptorContext context, object value)
         {
             throw new NotImplementedException();

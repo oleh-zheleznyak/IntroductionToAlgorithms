@@ -55,6 +55,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IntroductionToAlgorithms.Visuals\IntroductionToAlgorithms.Visuals.csproj">
+      <Project>{fb6fc84a-ddc8-4465-b37a-3fdfc4c0128e}</Project>
+      <Name>IntroductionToAlgorithms.Visuals</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IntroductionToAlgorithms\IntroductionToAlgorithms.csproj">
       <Project>{9c6df5ea-1a14-4ab8-a56e-1e749111b2dc}</Project>
       <Name>IntroductionToAlgorithms</Name>
