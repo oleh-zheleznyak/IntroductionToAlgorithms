@@ -52,6 +52,8 @@
   <ItemGroup>
     <Compile Include="GraphAlgorithms\DepthFirstSearchIteratorTest.cs" />
     <Compile Include="GraphAlgorithms\BreadthFirstSearchIteratorTest.cs" />
+    <Compile Include="GraphAlgorithms\DfsParenthesisFormatterTest.cs" />
+    <Compile Include="GraphAlgorithms\TestHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -16,7 +16,7 @@ namespace IntroductionToAlgorithms.Tests.GraphAlgorithms
         [TestMethod]
         public void BreadthFirstSearch_ShouldYieldElements_InCorrectOrder()
         {
-            DirectedGraph<int> graph = CreateSampleGraph();
+            DirectedGraph<int> graph = TestHelper.CreateSampleGraph();
             var dgml = Visualize(graph);
 
             var sequence = new BreadthFirstSearchIterator<int>(graph, 0);
@@ -25,19 +25,6 @@ namespace IntroductionToAlgorithms.Tests.GraphAlgorithms
             var actual = sequence.ToList();
 
             CollectionAssert.AreEqual(expected, actual);
-        }
-
-        private static DirectedGraph<int> CreateSampleGraph()
-        {
-            var builder = new DirectedGraphBuilder<int>();
-
-            builder.AddEdge(0, 1);
-            builder.AddEdge(0, 2);
-            builder.AddEdge(1, 3);
-            builder.AddEdge(2, 4);
-
-            var graph = builder.AsDirectedGraph();
-            return graph;
         }
 
         private static FileInfo Visualize<T>(DirectedGraph<T> graph)

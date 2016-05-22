@@ -12,16 +12,9 @@ namespace IntroductionToAlgorithms.Tests.GraphAlgorithms
     public class DepthFirstSearchIteratorTest
     {
         [TestMethod]
-        public void DepthFirstSearchIteratorTest_ShouldYieldElements_InCorrectOrder()
+        public void DepthFirstSearchIterator_ShouldYieldElements_InCorrectOrder()
         {
-            var builder = new DirectedGraphBuilder<int>();
-
-            builder.AddEdge(0, 1);
-            builder.AddEdge(0, 2);
-            builder.AddEdge(1, 3);
-            builder.AddEdge(2, 4);
-
-            var graph = builder.AsDirectedGraph();
+            DirectedGraph<int> graph = TestHelper.CreateSampleGraph();
 
             var sequence = new DepthFirstSearchIterator<int>(graph, 0);
 

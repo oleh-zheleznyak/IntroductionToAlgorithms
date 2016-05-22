@@ -43,6 +43,7 @@
     <Compile Include="GraphAlgorithms\BfsVertice.cs" />
     <Compile Include="GraphAlgorithms\DepthFirstSearchIterator.cs" />
     <Compile Include="GraphAlgorithms\BreadthFirstSearchIterator.cs" />
+    <Compile Include="GraphAlgorithms\DfsParenthesisFormatter.cs" />
     <Compile Include="GraphAlgorithms\DfsVertice.cs" />
     <Compile Include="GraphAlgorithms\DirectedGraph.cs" />
     <Compile Include="GraphAlgorithms\DirectedGraphBuilder.cs" />
