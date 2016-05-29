@@ -56,6 +56,10 @@
     <Compile Include="GraphAlgorithms\TestHelper.cs" />
     <Compile Include="GraphAlgorithms\TopologicalSortTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sorting\BubbleSortTests.cs" />
+    <Compile Include="Sorting\SelectionSortTests.cs" />
+    <Compile Include="Sorting\SortTests.cs" />
+    <Compile Include="Sorting\InsertionSortTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IntroductionToAlgorithms.Visuals\IntroductionToAlgorithms.Visuals.csproj">
