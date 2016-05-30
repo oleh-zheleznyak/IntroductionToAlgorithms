@@ -56,6 +56,7 @@
     <Compile Include="GraphAlgorithms\TestHelper.cs" />
     <Compile Include="GraphAlgorithms\TopologicalSortTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sorting\MergeSortTests.cs" />
     <Compile Include="Sorting\BubbleSortTests.cs" />
     <Compile Include="Sorting\SelectionSortTests.cs" />
     <Compile Include="Sorting\SortTests.cs" />
