@@ -41,7 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Foundations\ArraySum.cs" />
+    <Compile Include="Foundations\IMaximumSubarray.cs" />
     <Compile Include="Foundations\MaximumSubarrayDivideAndConquer.cs" />
+    <Compile Include="Foundations\MaximumSubarrayLinear.cs" />
     <Compile Include="GraphAlgorithms\BfsVertice.cs" />
     <Compile Include="GraphAlgorithms\DepthFirstSearchIterator.cs" />
     <Compile Include="GraphAlgorithms\BreadthFirstSearchIterator.cs" />

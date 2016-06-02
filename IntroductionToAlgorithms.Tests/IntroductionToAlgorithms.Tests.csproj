@@ -50,6 +50,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Foundations\MaximumSubarrayDivideAndConquerTests - Copy.cs" />
+    <Compile Include="Foundations\MaximumSubarrayTests.cs" />
     <Compile Include="Foundations\MaximumSubarrayDivideAndConquerTests.cs" />
     <Compile Include="GraphAlgorithms\DepthFirstSearchIteratorTest.cs" />
     <Compile Include="GraphAlgorithms\BreadthFirstSearchIteratorTest.cs" />

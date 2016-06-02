@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 namespace IntroductionToAlgorithms.Foundations.Tests
 {
     [TestClass]
-    public class MaximumSubarrayDivideAndConquerTests : MaximumSubarrayTests
+    public class MaximumSubarrayLinearTests : MaximumSubarrayTests
     {
         protected override IMaximumSubarray CreateSut()
         {
-            return new MaximumSubarrayDivideAndConquer();
+            return new MaximumSubarrayLinear();
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IntroductionToAlgorithms.Foundations
 {
-    public class MaximumSubarrayDivideAndConquer
+    public class MaximumSubarrayDivideAndConquer : IMaximumSubarray
     {
         public ArraySum FindMaximumSlice(int[] array)
         {
