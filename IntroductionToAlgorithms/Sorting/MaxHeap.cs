@@ -11,6 +11,7 @@ namespace IntroductionToAlgorithms.Sorting
         where T : IComparable<T>
     {
         private readonly IComparer<T> _comparer = Comparer<T>.Default;
+        private int _heapSize;
 
         // TODO: if this is readonly, the heap cannot grow
         private readonly T[] _array;
@@ -21,8 +22,26 @@ namespace IntroductionToAlgorithms.Sorting
 
             // TODO:mutating original array, consider passing a copy in ctor
             _array = array;
+            _heapSize = array.Length;
 
             BuildMaxHeap();
+        }
+
+        public T Peek()
+        {
+            return _array[0];
+        }
+
+        public T Pop()
+        {
+            T max = _array[0];
+            _array[0] = _array[_heapSize - 1];
+            _array[_heapSize - 1] = default(T);
+            _heapSize--;
+
+            Heapify(0);
+
+            return max;
         }
 
         private void BuildMaxHeap()
@@ -50,7 +69,7 @@ namespace IntroductionToAlgorithms.Sorting
 
         private int CheckMaxIndex(int index, int maxIndex)
         {
-            if (index < _array.Length && _comparer.Compare(_array[index], _array[maxIndex]) > 0)
+            if (index < _heapSize && _comparer.Compare(_array[index], _array[maxIndex]) > 0)
             {
                 maxIndex = index;
             }
@@ -75,7 +94,7 @@ namespace IntroductionToAlgorithms.Sorting
 
         public IEnumerator<T> GetEnumerator()
         {
-            return _array.AsEnumerable().GetEnumerator();
+            return _array.AsEnumerable().Take(_heapSize).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

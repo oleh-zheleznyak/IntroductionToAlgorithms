@@ -47,6 +47,30 @@ namespace IntroductionToAlgorithms.Sorting.Tests
             AssertEquality(new int[] { 6, 4, 5, 1, 3, 2, 0 }, new int[] { 6, 4, 5, 1, 3, 2, 0 });
         }
 
+        [TestMethod]
+        public void MaxHeap_Peek_ShouldRetrunMaxValue()
+        {
+            var input = new int[] { 5, 0, 7, 2 };
+            var sut = new MaxHeap<int>(input);
+            var actual = sut.Peek();
+            var expected = input.Max();
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void MaxHeap_Pop_ShouldRetrunMaxValueAndDiscardElement()
+        {
+            var input = new int[] { 5, 0, 7, 2 };
+
+            var sut = new MaxHeap<int>(input);
+            var expected = input.Max();
+            var actual = sut.Pop();
+
+            Assert.AreEqual(expected, actual);
+            CollectionAssert.AreEqual(new int[] { 5, 2, 0 }, sut.ToArray());
+        }
+
         private static void AssertEquality(int[] input, int[] expected)
         {
             var sut = new MaxHeap<int>(input);
