@@ -7,14 +7,20 @@ using System.Threading.Tasks;
 
 namespace IntroductionToAlgorithms.Sorting
 {
+    /// <summary>
+    /// This class is actually more than MaxHeap - it is a hybrid of MaxHeap and MaxPriorityQueue
+    /// The reason they are combined in one class is that it would be hard to provide an implementation
+    /// of MaxPriorityQueue that would be DRY and respect encapsulation of MaxHeap
+    /// Heap-Increase-Key is cannot be added without introducing a separate Key abstraction, since key comparison in encapsulated in type T
+    /// Heap-Insert is a trivial operation - copying data into a new bigger array (if needed), putting element at the top and calling heapify
+    /// </summary>
     public class MaxHeap<T> : IEnumerable<T>
         where T : IComparable<T>
     {
         private readonly IComparer<T> _comparer = Comparer<T>.Default;
         private int _heapSize;
 
-        // TODO: if this is readonly, the heap cannot grow
-        private readonly T[] _array;
+        private T[] _array;
 
         public MaxHeap(T[] array)
         {
@@ -29,11 +35,20 @@ namespace IntroductionToAlgorithms.Sorting
 
         public T Peek()
         {
+            ThrowIfEmpty();
+
             return _array[0];
+        }
+
+        private void ThrowIfEmpty()
+        {
+            if (_heapSize <= 0) throw new InvalidOperationException("Heap is empty");
         }
 
         public T Pop()
         {
+            ThrowIfEmpty();
+
             T max = _array[0];
             _array[0] = _array[_heapSize - 1];
             _array[_heapSize - 1] = default(T);
@@ -42,6 +57,34 @@ namespace IntroductionToAlgorithms.Sorting
             Heapify(0);
 
             return max;
+        }
+
+        public void Push(T value)
+        {
+            if (_heapSize == _array.Length) GrowArray();
+
+            _array[_heapSize] = value;
+
+            RestoreHeapProperty(_heapSize);
+
+            _heapSize++;
+        }
+
+        private void RestoreHeapProperty(int index)
+        {
+            int parentIndex = 0;
+            while ((parentIndex = ParentIndex(index)) >= 0 && _comparer.Compare(_array[index], _array[parentIndex]) > 0)
+            {
+                _array.Swap(index, parentIndex);
+                index = parentIndex;
+            }
+        }
+
+        private void GrowArray()
+        {
+            var newArray = new T[_array.Length * 2];
+            Array.Copy(_array, newArray, _array.Length);
+            _array = newArray;
         }
 
         private void BuildMaxHeap()
@@ -79,7 +122,7 @@ namespace IntroductionToAlgorithms.Sorting
 
         private int ParentIndex(int childIndex)
         {
-            return childIndex >> 1;
+            return (childIndex - 1) >> 1;
         }
 
         private int LeftChildIndex(int parentIndex)

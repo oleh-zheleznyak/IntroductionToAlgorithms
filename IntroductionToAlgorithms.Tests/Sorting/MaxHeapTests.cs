@@ -79,5 +79,18 @@ namespace IntroductionToAlgorithms.Sorting.Tests
 
             CollectionAssert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void PushTest()
+        {
+            var input = new int[] { 2, 1 };
+
+            var sut = new MaxHeap<int>(input);
+            var newItem = 3;
+            sut.Push(newItem);
+
+            Assert.AreEqual(newItem, sut.Peek());
+            CollectionAssert.AreEqual(new int[] { 3, 1, 2 }, sut.ToArray());
+        }
     }
 }
