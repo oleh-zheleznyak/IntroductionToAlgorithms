@@ -10,6 +10,7 @@ namespace IntroductionToAlgorithms.Sorting
         where T : IComparable<T>
     {
         private readonly IComparer<T> _comparer = Comparer<T>.Default;
+        private Random _random = new Random();
 
         public void Sort(T[] array)
         {
@@ -29,7 +30,10 @@ namespace IntroductionToAlgorithms.Sorting
 
         private int Partition(T[] array, int startIndex, int endIndex)
         {
-            var pivotValue = array[endIndex];
+            var pivotIndex = _random.Next(startIndex, endIndex);
+            var pivotValue = array[pivotIndex];
+            array.Swap(pivotIndex, endIndex);
+
             var sortedIndex = startIndex - 1;
 
             for (int i = startIndex; i < endIndex; i++)
