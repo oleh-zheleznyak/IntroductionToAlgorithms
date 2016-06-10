@@ -12,9 +12,37 @@ namespace IntroductionToAlgorithms.Sorting.Tests
     public abstract class SortTests
     {
         [TestMethod]
-        public void SortTest()
+        public void SortSmallArrayTest()
         {
-            var input = new int[] { 3, 5, 2, 1, 4 };
+            Scenario(new int[] { 3, 5, 2, 1, 4 });
+        }
+
+        [TestMethod]
+        public void SortSingleElementArrayTest()
+        {
+            Scenario(new int[] { 1 });
+        }
+
+        [TestMethod]
+        public void SortReversedArrayTest()
+        {
+            Scenario(new int[] { 5, 4, 3, 2, 1 });
+        }
+
+        [TestMethod]
+        public void SortSortedArrayTest()
+        {
+            Scenario(new int[] { 1, 2, 3, 4, 5 });
+        }
+
+        [TestMethod]
+        public void SortArrayWithSameElementsTest()
+        {
+            Scenario(new int[] { 1, 1, 1, 1, 1, 1, 1 });
+        }
+
+        private void Scenario(int[] input)
+        {
             var expected = input.OrderBy(x => x).ToArray();
 
             var sut = CreateSortAlgorithm();
