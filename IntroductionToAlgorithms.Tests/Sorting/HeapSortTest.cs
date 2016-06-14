@@ -12,9 +12,9 @@ namespace IntroductionToAlgorithms.Tests.Sorting
     [TestClass]
     public class HeapSortTest : SortTests
     {
-        protected override ISort<int> CreateSortAlgorithm()
+        protected override ISort<byte> CreateSortAlgorithm()
         {
-            return new HeapSort<int>();
+            return new HeapSort<byte>();
         }
     }
 }

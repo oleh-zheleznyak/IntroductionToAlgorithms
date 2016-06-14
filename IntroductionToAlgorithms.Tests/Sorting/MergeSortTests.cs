@@ -11,9 +11,9 @@ namespace IntroductionToAlgorithms.Sorting.Tests
     [TestClass]
     public class MergeSortTests : SortTests
     {
-        protected override ISort<int> CreateSortAlgorithm()
+        protected override ISort<byte> CreateSortAlgorithm()
         {
-            return new MergeSort<int>();
+            return new MergeSort<byte>();
         }
     }
 }

@@ -14,34 +14,34 @@ namespace IntroductionToAlgorithms.Sorting.Tests
         [TestMethod]
         public void SortSmallArrayTest()
         {
-            Scenario(new int[] { 3, 5, 2, 1, 4 });
+            Scenario(new byte[] { 3, 5, 2, 1, 4 });
         }
 
         [TestMethod]
         public void SortSingleElementArrayTest()
         {
-            Scenario(new int[] { 1 });
+            Scenario(new byte[] { 1 });
         }
 
         [TestMethod]
         public void SortReversedArrayTest()
         {
-            Scenario(new int[] { 5, 4, 3, 2, 1 });
+            Scenario(new byte[] { 5, 4, 3, 2, 1 });
         }
 
         [TestMethod]
         public void SortSortedArrayTest()
         {
-            Scenario(new int[] { 1, 2, 3, 4, 5 });
+            Scenario(new byte[] { 1, 2, 3, 4, 5 });
         }
 
         [TestMethod]
         public void SortArrayWithSameElementsTest()
         {
-            Scenario(new int[] { 1, 1, 1, 1, 1, 1, 1 });
+            Scenario(new byte[] { 1, 1, 1, 1, 1, 1, 1 });
         }
 
-        private void Scenario(int[] input)
+        private void Scenario(byte[] input)
         {
             var expected = input.OrderBy(x => x).ToArray();
 
@@ -52,6 +52,6 @@ namespace IntroductionToAlgorithms.Sorting.Tests
             CollectionAssert.AreEqual(expected, input);
         }
 
-        protected abstract ISort<int> CreateSortAlgorithm();
+        protected abstract ISort<byte> CreateSortAlgorithm();
     }
 }

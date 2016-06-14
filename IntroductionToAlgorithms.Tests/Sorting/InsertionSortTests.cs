@@ -11,9 +11,9 @@ namespace IntroductionToAlgorithms.Sorting.Tests
     [TestClass]
     public class InsertionSortTests : SortTests
     {
-        protected override ISort<int> CreateSortAlgorithm()
+        protected override ISort<byte> CreateSortAlgorithm()
         {
-            return new InsertionSort<int>();
+            return new InsertionSort<byte>();
         }
     }
 }

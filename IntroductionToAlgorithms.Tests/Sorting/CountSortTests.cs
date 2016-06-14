@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 namespace IntroductionToAlgorithms.Sorting.Tests
 {
     [TestClass]
-    public class BubbleSortTests : SortTests
+    public class CountSortTests : SortTests
     {
         protected override ISort<byte> CreateSortAlgorithm()
         {
-            return new BubbleSort<byte>();
+            return new CountSort();
         }
     }
 }

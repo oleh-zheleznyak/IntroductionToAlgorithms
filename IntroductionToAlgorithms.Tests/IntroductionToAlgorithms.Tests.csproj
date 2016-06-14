@@ -64,6 +64,7 @@
     <Compile Include="Sorting\MergeSortTests.cs" />
     <Compile Include="Sorting\BubbleSortTests.cs" />
     <Compile Include="Sorting\QuickSortTests.cs" />
+    <Compile Include="Sorting\SelectionSortTests - Copy.cs" />
     <Compile Include="Sorting\SelectionSortTests.cs" />
     <Compile Include="Sorting\SortTests.cs" />
     <Compile Include="Sorting\InsertionSortTests.cs" />
