@@ -11,6 +11,6 @@ namespace IntroductionToAlgorithms.DataStructures
     {
         TValue Search(TKey key);
         void Insert(TKey key, TValue value);
-        void Delete(TKey key);
+        bool Delete(TKey key);
     }
 }

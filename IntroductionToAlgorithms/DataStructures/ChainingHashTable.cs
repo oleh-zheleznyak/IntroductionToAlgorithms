@@ -10,58 +10,93 @@ namespace IntroductionToAlgorithms.DataStructures
     public class ChainingHashTable<TKey, TValue> : IHashTable<TKey, TValue>
         where TKey : IEquatable<TKey>
     {
+        private struct Pair : IEquatable<Pair>
+        {
+            public Pair(TKey key, TValue value)
+            {
+                Key = key;
+                Value = value;
+
+                _keyComparer = EqualityComparer<TKey>.Default;
+            }
+
+            public static Pair FromKey(TKey key)
+            {
+                return new Pair(key, default(TValue));
+            }
+
+            private readonly IEqualityComparer _keyComparer;
+            public TKey Key { get; }
+            public TValue Value { get; }
+
+            public bool Equals(Pair other)
+            {
+                return _keyComparer.Equals(Key, other.Key);
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (obj is Pair) return Equals((Pair)obj);
+                else return false;
+            }
+
+            public override int GetHashCode()
+            {
+                return _keyComparer.GetHashCode(Key);
+            }
+        }
+
         //TODO: replace size by capacity, as reserving the whole storage at once is not efficient
         public ChainingHashTable(int size)
         {
             _size = size; // use HashHelpers.GetPrime instead
-            _data = new LinkedList<KeyValuePair<TKey, TValue>>[_size]; // do not allocate full storage at once
+            _data = new LinkedList<Pair>[_size]; // do not allocate full storage at once
         }
 
         private EqualityComparer<TKey> _comparer = EqualityComparer<TKey>.Default;
         private readonly int _size;
-        private readonly LinkedList<KeyValuePair<TKey, TValue>>[] _data;
+        private readonly LinkedList<Pair>[] _data;
 
-        public void Delete(TKey key)
+        public bool Delete(TKey key)
         {
             var list = GetListByKey(key);
-            if (list == null) return; //TODO: consider throwing exception
+            if (list == null) return false;
 
-            // TODO:inefficient, this is achievable in one pass
-            var pair = list.FirstOrDefault(x => _comparer.Equals(x.Key, key));
-            list.Remove(pair);
+            return list.Remove(Pair.FromKey(key));
         }
 
         public void Insert(TKey key, TValue value)
         {
             var list = GetListByKey(key);
 
-            if (list == null) list = new LinkedList<KeyValuePair<TKey, TValue>>();
+            if (list == null) list = new LinkedList<Pair>();
 
-            list.AddFirst(new KeyValuePair<TKey, TValue>(key, value));
+            list.AddFirst(new Pair(key, value));
         }
 
-        private LinkedList<KeyValuePair<TKey, TValue>> GetListByKey(TKey key)
+        private LinkedList<Pair> GetListByKey(TKey key)
         {
-            var index = GetIndex(key);
-            var list = _data[index];
-
-            return list;
+            return _data[GetIndex(key)];
         }
 
-        // TODO: rewrite using exceptions? returning default() is a bad option for value types
         public TValue Search(TKey key)
         {
             var list = GetListByKey(key);
-            if (list == null) return default(TValue);
+            if (list == null) throw new KeyNotFoundException();
 
-            var pair = list.FirstOrDefault(x => _comparer.Equals(x.Key, key));
+            var node = list.Find(Pair.FromKey(key));
 
-            return pair.Value;
+            return node.Value.Value;
         }
 
         private int GetIndex(TKey key)
         {
-            return key.GetHashCode() % _size;
+            var index = key.GetHashCode() % _size;
+
+            // remainder of division % can be negative for negative numbers, but with absolute value always less then _size
+            if (index < 0) index += _size;
+
+            return index;
         }
     }
 }
