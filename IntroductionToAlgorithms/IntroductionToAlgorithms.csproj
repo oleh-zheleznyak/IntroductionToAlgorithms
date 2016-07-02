@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataStructures\BinarySearchTree.cs" />
     <Compile Include="DataStructures\ChainingHashTable.cs" />
     <Compile Include="DataStructures\IHashTable.cs" />
     <Compile Include="Foundations\ArraySum.cs" />

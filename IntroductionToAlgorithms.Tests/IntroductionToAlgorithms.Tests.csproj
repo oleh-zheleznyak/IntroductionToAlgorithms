@@ -50,6 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DataStructures\BinarySearchTreeTests.cs" />
     <Compile Include="Foundations\MaximumSubarrayLinearTests.cs" />
     <Compile Include="Foundations\MaximumSubarrayTests.cs" />
     <Compile Include="Foundations\MaximumSubarrayDivideAndConquerTests.cs" />
