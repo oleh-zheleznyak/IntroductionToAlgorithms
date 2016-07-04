@@ -7,31 +7,41 @@ using System.Threading.Tasks;
 
 namespace IntroductionToAlgorithms.DataStructures
 {
-    public class BinarySearchTree<T> : IEnumerable<T>
-        where T : IComparable<T>
+    public class BinarySearchTree<TKey, TValue> : IEnumerable<BinarySearchTree<TKey, TValue>.Node>
+        where TKey : IComparable<TKey>
     {
         public class Node
         {
-            public Node(T value)
+            public Node(TKey key, TValue value)
             {
+                Key = key;
                 Value = value;
             }
 
-            public Node Parent { get; set; }
-            public Node Left { get; set; }
-            public Node Right { get; set; }
-            public T Value { get; }
+            internal Node Parent { get; set; }
+            internal Node Left { get; set; }
+            internal Node Right { get; set; }
+            public TKey Key { get; }
+            public TValue Value { get; }
         }
 
-        private IComparer<T> _comparer = Comparer<T>.Default;
+        private IComparer<TKey> _comparer = Comparer<TKey>.Default;
+        private Random _random = new Random();
 
         public Node Head { get; private set; }
 
-        public void Add(T value)
+        private bool NextRandom()
         {
+            return _random.NextDouble() > 0.5;
+        }
+
+        public void Add(Node node)
+        {
+            var newNode = new Node(node.Key, node.Value);
+
             if (Head == null)
             {
-                Head = new Node(value);
+                Head = newNode;
                 return;
             }
 
@@ -41,20 +51,67 @@ namespace IntroductionToAlgorithms.DataStructures
             while (current != null)
             {
                 parent = current;
-                comparison = _comparer.Compare(value, current.Value);
+                comparison = _comparer.Compare(node.Key, current.Key);
                 current = comparison < 0 ? current.Left : current.Right;
             }
-
-            var newNode = new Node(value);
 
             newNode.Parent = parent;
             if (comparison < 0) parent.Left = newNode;
             else parent.Right = newNode;
         }
 
+        public void Add(IEnumerable<Node> nodes)
+        {
+            foreach (var node in nodes)
+            {
+                Add(node);
+            }
+        }
+
+        public Node Find(TKey key)
+        {
+            var current = Head;
+            while (current != null)
+            {
+                var comparison = _comparer.Compare(key, current.Key);
+                if (comparison == 0) break;
+                else if (comparison < 0) current = current.Left;
+                else current = current.Right;
+            }
+            return current;
+        }
+
+        public IEnumerable<Node> BreadthFirstTraversal()
+        {
+            if (Head == null) yield break;
+
+            var queue = new Queue<Node>();
+            queue.Enqueue(Head);
+            Action<Node> enqueIfNotNull = n => { if (n != null) queue.Enqueue(n); };
+
+            while (queue.Count > 0)
+            {
+                var element = queue.Dequeue();
+                enqueIfNotNull(element.Left);
+                enqueIfNotNull(element.Right);
+
+                yield return element;
+            }
+        }
+
         public IEnumerable<Node> InOrderTraversal()
         {
             return InOrderTraversal(Head);
+        }
+
+        public IEnumerable<Node> PreOrderTraversal()
+        {
+            return PreOrderTraversal(Head);
+        }
+
+        public IEnumerable<Node> PostOrderTraversal()
+        {
+            return PostOrderTraversal(Head);
         }
 
         private IEnumerable<Node> InOrderTraversal(Node node)
@@ -66,9 +123,27 @@ namespace IntroductionToAlgorithms.DataStructures
                 .Union(InOrderTraversal(node.Right));
         }
 
-        public IEnumerator<T> GetEnumerator()
+        private IEnumerable<Node> PreOrderTraversal(Node node)
         {
-            return InOrderTraversal().Select(x=>x.Value).GetEnumerator();
+            if (node == null) return Enumerable.Empty<Node>();
+            else return
+                Enumerable.Repeat(node, 1)
+                .Union(PreOrderTraversal(node.Left))
+                .Union(PreOrderTraversal(node.Right));
+        }
+
+        private IEnumerable<Node> PostOrderTraversal(Node node)
+        {
+            if (node == null) return Enumerable.Empty<Node>();
+            else return
+                PostOrderTraversal(node.Left)
+                .Union(PostOrderTraversal(node.Right))
+                .Union(Enumerable.Repeat(node, 1));
+        }
+
+        public IEnumerator<BinarySearchTree<TKey, TValue>.Node> GetEnumerator()
+        {
+            return InOrderTraversal().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
