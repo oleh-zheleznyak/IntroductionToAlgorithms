@@ -66,6 +66,7 @@
     <Compile Include="Sorting\SelectionSort.cs" />
     <Compile Include="Sorting\InsertionSort.cs" />
     <Compile Include="Sorting\ISort.cs" />
+    <Compile Include="Utilities\StackExtensions.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

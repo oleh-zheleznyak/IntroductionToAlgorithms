@@ -53,6 +53,12 @@ namespace IntroductionToAlgorithms.DataStructures.Tests
         }
 
         [TestMethod]
+        public void PreOrderTraversalNonRecursiveTest()
+        {
+            Scenario(new int[] { 4, 2, 1, 3, 6, 5, 7 }, x => x.PreOrderTraversalNonRecursive());
+        }
+
+        [TestMethod]
         public void PostOrderTraversalTest()
         {
             Scenario(new int[] { 1, 3, 2, 5, 7, 6, 4 }, x => x.PostOrderTraversal());

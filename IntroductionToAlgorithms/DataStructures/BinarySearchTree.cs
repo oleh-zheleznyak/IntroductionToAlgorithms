@@ -2,8 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using IntroductionToAlgorithms.Utilities;
 
 namespace IntroductionToAlgorithms.DataStructures
 {
@@ -26,14 +25,8 @@ namespace IntroductionToAlgorithms.DataStructures
         }
 
         private IComparer<TKey> _comparer = Comparer<TKey>.Default;
-        private Random _random = new Random();
 
         public Node Head { get; private set; }
-
-        private bool NextRandom()
-        {
-            return _random.NextDouble() > 0.5;
-        }
 
         public void Add(Node node)
         {
@@ -102,6 +95,29 @@ namespace IntroductionToAlgorithms.DataStructures
         public IEnumerable<Node> InOrderTraversal()
         {
             return InOrderTraversal(Head);
+        }
+
+        public IEnumerable<Node> PreOrderTraversalNonRecursive()
+        {
+            if (Head == null) yield break;
+
+            var stack = new Stack<Node>();
+
+            stack.PushIfNotNull(Head);
+
+            while (stack.Count > 0)
+            {
+                var node = stack.Pop();
+                stack.PushIfNotNull(node.Right);
+                stack.PushIfNotNull(node.Left);
+
+                yield return node;
+            }
+        }
+
+        private void PushNonNullNode(Stack<Node> stack, Node node)
+        {
+            if (node != null) stack.Push(node);
         }
 
         public IEnumerable<Node> PreOrderTraversal()
