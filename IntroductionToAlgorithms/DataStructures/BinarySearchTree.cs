@@ -24,6 +24,17 @@ namespace IntroductionToAlgorithms.DataStructures
             public TValue Value { get; }
         }
 
+        private struct NodeVisit
+        {
+            public NodeVisit(Node node, bool visited)
+            {
+                Node = node;
+                Visited = visited;
+            }
+            public Node Node { get; }
+            public bool Visited { get; }
+        }
+
         private IComparer<TKey> _comparer = Comparer<TKey>.Default;
 
         public Node Head { get; private set; }
@@ -112,6 +123,33 @@ namespace IntroductionToAlgorithms.DataStructures
                 stack.PushIfNotNull(node.Left);
 
                 yield return node;
+            }
+        }
+
+        public IEnumerable<Node> InOrderTraversalNonRecursive()
+        {
+            if (Head == null) yield break;
+
+            var stack = new Stack<NodeVisit>();
+
+            Action<NodeVisit> pushIfNotNull = x => { if (x.Node != null) stack.Push(x); };
+
+            pushIfNotNull(new NodeVisit(Head, false));
+
+            while (stack.Count > 0)
+            {
+                var node = stack.Pop();
+
+                if (node.Visited)
+                {
+                    yield return node.Node;
+                }
+                else
+                {
+                    pushIfNotNull(new NodeVisit(node.Node.Right,false));
+                    pushIfNotNull(new NodeVisit(node.Node, true));
+                    pushIfNotNull(new NodeVisit(node.Node.Left, false));
+                }
             }
         }
 
