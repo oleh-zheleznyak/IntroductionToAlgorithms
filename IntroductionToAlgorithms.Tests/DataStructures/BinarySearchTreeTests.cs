@@ -71,9 +71,38 @@ namespace IntroductionToAlgorithms.DataStructures.Tests
         }
 
         [TestMethod]
+        public void PostOrderTraversalNonRecursiveTest()
+        {
+            Scenario(new int[] { 1, 3, 2, 5, 7, 6, 4 }, x => x.PostOrderTraversalNonRecursive());
+        }
+
+        [TestMethod]
         public void BreadthFirstTraversalTest()
         {
             Scenario(new int[] { 4, 2, 6, 1, 3, 5, 7 }, x => x.BreadthFirstTraversal());
+        }
+
+        [TestMethod]
+        public void InOrderTraversalLoadTest()
+        {
+            var data = GetRandomArray();
+
+            var tree = new BinarySearchTree<int, bool>();
+            tree.Add(data.Select(x => new BinarySearchTree<int, bool>.Node(x, false)));
+
+            var actual = tree.InOrderTraversalNonRecursive().Select(x=>x.Key).ToArray();
+            var expected = data.OrderBy(x => x).ToArray();
+
+            CollectionAssert.AreEquivalent(expected, actual);
+        }
+
+        private static int[] GetRandomArray()
+        {
+            var size = 100000;
+            var random = new Random();
+            var data = Enumerable.Repeat<int>(0, size).Select(x => random.Next()).ToArray();
+
+            return data;
         }
     }
 }

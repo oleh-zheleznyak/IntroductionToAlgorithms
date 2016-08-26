@@ -110,23 +110,25 @@ namespace IntroductionToAlgorithms.DataStructures
 
         public IEnumerable<Node> PreOrderTraversalNonRecursive()
         {
-            if (Head == null) yield break;
-
-            var stack = new Stack<Node>();
-
-            stack.PushIfNotNull(Head);
-
-            while (stack.Count > 0)
-            {
-                var node = stack.Pop();
-                stack.PushIfNotNull(node.Right);
-                stack.PushIfNotNull(node.Left);
-
-                yield return node;
-            }
+            return IterativeTraversal(x => new NodeVisit[] { new NodeVisit(x.Right, false), new NodeVisit(x.Left, false), new NodeVisit(x, true) });
         }
 
         public IEnumerable<Node> InOrderTraversalNonRecursive()
+        {
+            return IterativeTraversal(x => new NodeVisit[] { new NodeVisit(x.Right, false), new NodeVisit(x, true), new NodeVisit(x.Left, false) });
+        }
+
+        public IEnumerable<Node> PostOrderTraversalNonRecursive()
+        {
+            return IterativeTraversal(x => new NodeVisit[] { new NodeVisit(x, true), new NodeVisit(x.Right, false), new NodeVisit(x.Left, false) });
+        }
+
+        /// <summary>
+        /// Performs one of the iterations: pre-, in-, post-
+        /// </summary>
+        /// <param name="generator">creating an array object instance per node is inefficient and puts pressure on GC and heap, but is sufficiently fast for small sets of data</param>
+        /// <returns>one of the iterators according to generator function</returns>
+        private IEnumerable<Node> IterativeTraversal(Func<Node, NodeVisit[]> generator)
         {
             if (Head == null) yield break;
 
@@ -146,9 +148,11 @@ namespace IntroductionToAlgorithms.DataStructures
                 }
                 else
                 {
-                    pushIfNotNull(new NodeVisit(node.Node.Right,false));
-                    pushIfNotNull(new NodeVisit(node.Node, true));
-                    pushIfNotNull(new NodeVisit(node.Node.Left, false));
+                    var array = generator(node.Node);
+                    foreach (var item in array)
+                    {
+                        pushIfNotNull(item);
+                    }
                 }
             }
         }
