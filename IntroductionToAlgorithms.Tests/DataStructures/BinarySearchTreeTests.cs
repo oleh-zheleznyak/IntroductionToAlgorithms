@@ -90,7 +90,7 @@ namespace IntroductionToAlgorithms.DataStructures.Tests
             var tree = new BinarySearchTree<int, bool>();
             tree.Add(data.Select(x => new BinarySearchTree<int, bool>.Node(x, false)));
 
-            var actual = tree.InOrderTraversalNonRecursive().Select(x=>x.Key).ToArray();
+            var actual = tree.InOrderTraversalNonRecursive().Select(x => x.Key).ToArray();
             var expected = data.OrderBy(x => x).ToArray();
 
             CollectionAssert.AreEquivalent(expected, actual);
@@ -103,6 +103,42 @@ namespace IntroductionToAlgorithms.DataStructures.Tests
             var data = Enumerable.Repeat<int>(0, size).Select(x => random.Next()).ToArray();
 
             return data;
+        }
+
+        [TestMethod]
+        public void Minimum_ShouldReturnNull_ForEmptyTree()
+        {
+            Assert.IsNull(_sut.Minimum());
+        }
+
+        [TestMethod]
+        public void Minimum_ShouldReturnNodeWithMinimumValue()
+        {
+            // Act
+            _sut.Add(_testData);
+
+            var expected = _testData.OrderBy(x => x.Key).First();
+            var actual = _sut.Minimum();
+
+            Assert.AreEqual(expected.Key, actual.Key);
+        }
+
+        [TestMethod]
+        public void Maximum_ShouldReturnNodeWithMinimumValue()
+        {
+            // Act
+            _sut.Add(_testData);
+
+            var expected = _testData.OrderByDescending(x => x.Key).First();
+            var actual = _sut.Maximum();
+
+            Assert.AreEqual(expected.Key, actual.Key);
+        }
+
+        [TestMethod]
+        public void Maximum_ShouldReturnNull_ForEmptyTree()
+        {
+            Assert.IsNull(_sut.Maximum());
         }
     }
 }

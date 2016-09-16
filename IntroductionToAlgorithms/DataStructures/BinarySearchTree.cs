@@ -85,6 +85,40 @@ namespace IntroductionToAlgorithms.DataStructures
             return current;
         }
 
+        public Node Minimum()
+        {
+            return Minimum(Head);
+        }
+
+        private Node Minimum(Node node)
+        {
+            if (node == null) return null;
+
+            while (node.Left != null)
+            {
+                node = node.Left;
+            }
+
+            return node;
+        }
+
+        public Node Maximum()
+        {
+            return Maximum(Head);
+        }
+
+        private Node Maximum(Node node)
+        {
+            if (node == null) return null;
+
+            while (node.Right!=null)
+            {
+                node = node.Right;
+            }
+
+            return node;
+        }
+
         public IEnumerable<Node> BreadthFirstTraversal()
         {
             if (Head == null) yield break;
