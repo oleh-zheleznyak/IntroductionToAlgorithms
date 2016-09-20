@@ -85,6 +85,46 @@ namespace IntroductionToAlgorithms.DataStructures
             return current;
         }
 
+        public Node Successor(Node node)
+        {
+            if (node == null) throw new ArgumentNullException(nameof(node));
+
+            if (node.Right != null)
+            {
+                return Minimum(node.Right);
+            }
+            else
+            {
+                var parent = node.Parent;
+                while (parent!=null && node == parent.Right)
+                {
+                    node = parent;
+                    parent = parent.Parent;
+                }
+                return parent;
+            }
+        }
+
+        public Node Predescessor(Node node)
+        {
+            if (node == null) throw new ArgumentNullException(nameof(node));
+
+            if (node.Left != null)
+            {
+                return Maximum(node.Left);
+            }
+            else
+            {
+                var parent = node.Parent;
+                while (parent != null && node == parent.Left)
+                {
+                    node = parent;
+                    parent = parent.Parent;
+                }
+                return parent;
+            }
+        }
+
         public Node Minimum()
         {
             return Minimum(Head);
@@ -111,7 +151,7 @@ namespace IntroductionToAlgorithms.DataStructures
         {
             if (node == null) return null;
 
-            while (node.Right!=null)
+            while (node.Right != null)
             {
                 node = node.Right;
             }

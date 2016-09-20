@@ -140,5 +140,83 @@ namespace IntroductionToAlgorithms.DataStructures.Tests
         {
             Assert.IsNull(_sut.Maximum());
         }
+
+        [TestMethod]
+        public void Successor_ShouldReturnMinimalBiggerValue_GivenNoRightChild()
+        {
+            _sut.Add(_testData);
+
+            SuccessorScenario(6, 7);
+        }
+
+        [TestMethod]
+        public void Successor_ShouldReturnMinimalBiggerValue_WhenRightChildExists()
+        {
+            _sut.Add(_testData);
+
+            SuccessorScenario(4, 5);
+        }
+
+        [TestMethod]
+        public void Successor_ShouldReturnNextKey_ForAllKeysExceptMax()
+        {
+            _sut.Add(_testData);
+
+            // take all keys but the maximum
+            var keys = _testData.OrderByDescending(x => x.Key).Skip(1).ToList();
+
+            foreach (var key in keys)
+            {
+                SuccessorScenario(key.Key, key.Key + 1);
+            }
+        }
+
+        [TestMethod]
+        public void Predescessor_ShouldReturnMinimalBiggerValue_GivenNoLeftChild()
+        {
+            _sut.Add(_testData);
+
+            PredescessorScenario(3, 2);
+        }
+
+        [TestMethod]
+        public void Predescessor_ShouldReturnMinimalBiggerValue_WhenLeftChildExists()
+        {
+            _sut.Add(_testData);
+
+            PredescessorScenario(4, 3);
+        }
+
+        [TestMethod]
+        public void Predescessor_ShouldReturnNextKey_ForAllKeysExceptMax()
+        {
+            _sut.Add(_testData);
+
+            // take all keys but the minimum
+            var keys = _testData.OrderBy(x => x.Key).Skip(1).ToList();
+
+            foreach (var key in keys)
+            {
+                PredescessorScenario(key.Key, key.Key - 1);
+            }
+        }
+
+        private void PredescessorScenario(int key, int prevKey)
+        {
+            PredescessorOrSuccessor(key, prevKey, (tree, node) => tree.Predescessor(node));
+        }
+
+        private void SuccessorScenario(int key, int nextKey)
+        {
+            PredescessorOrSuccessor(key, nextKey, (tree, node) => tree.Successor(node));
+        }
+
+        private void PredescessorOrSuccessor(int keyToFind, int expected, Func<BinarySearchTree<int, string>, BinarySearchTree<int, string>.Node, BinarySearchTree<int, string>.Node> nodeFinder)
+        {
+            var node = _sut.Find(keyToFind);
+            var actual = nodeFinder(_sut, node);
+
+            Assert.AreEqual(expected, actual.Key);
+        }
     }
 }
