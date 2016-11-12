@@ -51,6 +51,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DataStructures\BinarySearchTreeTests.cs" />
+    <Compile Include="DataStructures\SinglyLinkendListTests.cs" />
     <Compile Include="DataStructures\TwoStackQueueTests.cs" />
     <Compile Include="Foundations\MaximumSubarrayLinearTests.cs" />
     <Compile Include="Foundations\MaximumSubarrayTests.cs" />

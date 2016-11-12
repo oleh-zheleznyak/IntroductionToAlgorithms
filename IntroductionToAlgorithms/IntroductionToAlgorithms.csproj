@@ -44,6 +44,9 @@
     <Compile Include="DataStructures\ChainingHashTable.cs" />
     <Compile Include="DataStructures\IHashTable.cs" />
     <Compile Include="DataStructures\IQueue.cs" />
+    <Compile Include="DataStructures\IStack.cs" />
+    <Compile Include="DataStructures\LinkedQueue.cs" />
+    <Compile Include="DataStructures\LinkedStack.cs" />
     <Compile Include="DataStructures\SinglyLinkendList.cs" />
     <Compile Include="DataStructures\TwoStackQueue.cs" />
     <Compile Include="Foundations\ArraySum.cs" />
