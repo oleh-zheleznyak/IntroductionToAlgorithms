@@ -1,0 +1,21 @@
+{
+	"version": "1.0.0-*",
+	"testRunner": "mstest",
+
+	"dependencies": {
+		"IntroductionToAlgorithms": { "target": "project" },
+		"IntroductionToAlgorithms.Visuals": { "target": "project" },
+		"MSTest.TestAdapter": "1.1.8-rc",
+		"MSTest.TestFramework": "1.0.8-rc",
+		"NETStandard.Library": "1.6.0"
+	},
+
+	"frameworks": {
+		"netstandard1.6": {
+			"imports": "dnxcore50"
+		}
+	},
+	"runtimes": {
+		"win10-x64": {}
+	}
+}

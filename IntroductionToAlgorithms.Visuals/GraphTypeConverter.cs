@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace IntroductionToAlgorithms.Visuals
 {
@@ -12,7 +13,7 @@ namespace IntroductionToAlgorithms.Visuals
     {
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            if (sourceType.IsGenericType && sourceType.GetGenericTypeDefinition() == typeof(GraphAlgorithms.DirectedGraph<>))
+            if (sourceType.GetTypeInfo().IsGenericType && sourceType.GetGenericTypeDefinition() == typeof(GraphAlgorithms.DirectedGraph<>))
                 return true;
 
             return base.CanConvertFrom(context, sourceType);
