@@ -3,7 +3,8 @@
 	"testRunner": "mstest",
 
 	"dependencies": {
-		"IntroductionToAlgorithms": { "target": "project" },
+			"dotnet-test-mstest": "1.1.2-preview",
+			"IntroductionToAlgorithms": { "target": "project" },
 		"IntroductionToAlgorithms.Visuals": { "target": "project" },
 		"MSTest.TestAdapter": "1.1.8-rc",
 		"MSTest.TestFramework": "1.0.8-rc",
@@ -11,9 +12,10 @@
 	},
 
 	"frameworks": {
-		"netstandard1.6": {
+		"netcoreapp1.0": {
 			"imports": "dnxcore50"
 		}
+
 	},
 	"runtimes": {
 		"win10-x64": {}
