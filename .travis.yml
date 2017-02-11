@@ -2,3 +2,5 @@ language: csharp
 dotnet: 1.0.0-preview2-003131
 mono: none
 solution: IntroductionToAlgorithms.sln
+dist: trusty
+sudo: required
