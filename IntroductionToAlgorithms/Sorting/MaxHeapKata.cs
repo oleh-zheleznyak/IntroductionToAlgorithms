@@ -9,16 +9,16 @@ namespace IntroductionToAlgorithms.Sorting
     /// NOTE: this is just a dojo, an excersise, this class is not very useful by itself
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ImmutableMaxHeap<T> : IEnumerable<T>, IReadOnlyCollection<T>
+    public class MaxHeapKata<T> : IEnumerable<T>, IReadOnlyCollection<T>
         where T : IComparable<T>
     {
         private readonly T[] _storage;
         private int _heapSize; // NOTE: poor modelling of heapsize - disassociated with sotrage
         private IComparer<T> _comparer = Comparer<T>.Default;  // TODO: consider accepting comparer as parameter
 
-        public int Count => _heapSize; // this will change when heap is mutated
+        public int Count => _heapSize;
 
-        public ImmutableMaxHeap(T[] storage)
+        public MaxHeapKata(T[] storage)
         {
             if (storage is null) throw new ArgumentNullException(nameof(storage));
             if (storage.Length == 0) throw new ArgumentException("Cannot construct max heap on empty array", nameof(storage));
@@ -26,7 +26,28 @@ namespace IntroductionToAlgorithms.Sorting
             _storage = BuildMaxHeap(storage);
         }
 
-        public T PeekMax() => _storage[0];
+        public T Peek()
+        {
+            ThrowIfEmpty();
+            return _storage[0];
+        }
+
+        public T Pop()
+        {
+            ThrowIfEmpty();
+
+            Swap(_storage, 0, _heapSize - 1);
+            _heapSize -= 1;
+
+            MaxHeapify(_storage, 0);
+
+            return _storage[_heapSize];
+        }
+
+        private void ThrowIfEmpty()
+        {
+            if (_heapSize == 0) throw new InvalidOperationException("Heap is empty");
+        }
 
         private T[] BuildMaxHeap(T[] storage)
         {
@@ -70,7 +91,11 @@ namespace IntroductionToAlgorithms.Sorting
 
         private int Left(int index) => 2 * index + 1; // TODO: consider compiler aggressive inlining
 
-        public IEnumerator<T> GetEnumerator() => ((IEnumerable<T>)_storage).GetEnumerator();
+        public IEnumerator<T> GetEnumerator()
+        {
+            for (int i = 0; i < _heapSize; i++)
+                yield return _storage[i];
+        }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
