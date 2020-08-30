@@ -25,7 +25,7 @@ namespace IntroductionToAlgorithms.Visuals.Tests
             serializer.Serialize(writer, graph);
 
             var actual = XDocument.Parse(writer.ToString());
-            var expected = XDocument.Load(Path.Combine( Environment.CurrentDirectory, "SampleDgmlTest.dgml") );
+            var expected = XDocument.Load(Path.Combine(Environment.CurrentDirectory, Path.Combine("TestData", "SampleDgmlTest.dgml")));
 
             Assert.IsTrue(XDocument.DeepEquals(actual, expected));
         }
