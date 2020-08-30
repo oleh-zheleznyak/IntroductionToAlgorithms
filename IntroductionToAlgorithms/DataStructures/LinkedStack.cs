@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IntroductionToAlgorithms.DataStructures
+﻿namespace IntroductionToAlgorithms.DataStructures
 {
     /// <summary>
     /// A stack implemented on top of singly linked list

@@ -1,10 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using IntroductionToAlgorithms.GraphAlgorithms;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using IntroductionToAlgorithms.Tests.GraphAlgorithms;
 
 namespace IntroductionToAlgorithms.GraphAlgorithms.Tests
